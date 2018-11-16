@@ -17,3 +17,5 @@ To-do
     - pros: easier to scale
     - cons: need to handle more cases including bad and/or missing data
     
+
+Data source: https://files.pushshift.io/reddit/

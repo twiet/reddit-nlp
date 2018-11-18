@@ -18,8 +18,8 @@ def main():
         content = data['data']['title'] + " " + " ".join(data['data']['comments'])
         content = deleted.sub(" ", content)
         content = url.sub(" ", content)
-        content = punc.sub(" ", content)
         content = html.unescape(content)
+        content = punc.sub(" ", content)
         content = white.sub(" ", content)
         tokens = content.split(" ")
         if len(tokens) > 300:

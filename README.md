@@ -1,6 +1,9 @@
 # reddit-nlp
 
-Needs praw. run "pip install praw" first
+To run download the data from https://files.pushshift.io/reddit/submissions/ and https://files.pushshift.io/reddit/comments/
+you will need all the 2008 files. There should be 12 for comments and 12 for submissions. Also you need the subreddit csv here https://files.pushshift.io/reddit/subreddits/
+
+Running will take about an hour and should generate a data.txt file. I've added a sample.txt taken from that as an example.
 
 To-do
 1. Count word count per input [TODO: Kevin]

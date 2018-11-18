@@ -146,7 +146,8 @@ def dump_json(file_name, keys, d):
   with open(file_name, 'w') as outfile:
     for key in keys:
       sub = d[key]
-      data = { "data" : { "title": sub.title, "comments": sub.comments[:MAX_COMMENTS] }, "label": sub.subreddit }
+      comments = [comment.body for comment in sub.comments[:MAX_COMMENTS]]
+      data = { "data" : { "title": sub.title, "comments": comments }, "label": sub.subreddit }
       json.dump(data, outfile)
       outfile.write('\n')
 

@@ -1,9 +1,12 @@
 # reddit-nlp
 
-To run download the data from https://files.pushshift.io/reddit/submissions/ and https://files.pushshift.io/reddit/comments/
-you will need all the 2008 files. There should be 12 for comments and 12 for submissions. Also you need the subreddit csv here https://files.pushshift.io/reddit/subreddits/
+To run 
+1. download the data from https://files.pushshift.io/reddit/submissions/ and https://files.pushshift.io/reddit/comments/
+2. You will need all the 2008 files. There should be 12 for comments and 12 for submissions.
+3. Also you need the subreddit csv here https://files.pushshift.io/reddit/subreddits/
+4. Running will take about an hour and should generate a data.txt file. I've added a sample.txt taken from that as an example.
 
-Running will take about an hour and should generate a data.txt file. I've added a sample.txt taken from that as an example.
+Feel free to add comments on any inefficiencies since I didn't focus too much on performance.
 
 To-do
 1. Count word count per input [TODO: Kevin]

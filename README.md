@@ -27,6 +27,10 @@ Cleaning
   - some posts and comments just say [deleted] which means the original post was removed. We should not include those
   - submissions with no comments or comments less than some threshold should also be removed
   - for comments we can focus on the higher rated ones more
+
+To run clean.py
+  - python clean.py sample_data.txt
+  - this generates two separate files labels.txt and contents.txt
   
   
   

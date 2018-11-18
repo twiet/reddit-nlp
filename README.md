@@ -4,9 +4,9 @@ To run
 1. download the data from https://files.pushshift.io/reddit/submissions/ and https://files.pushshift.io/reddit/comments/
 2. You will need all the 2008 files. There should be 12 for comments and 12 for submissions.
 3. Also you need the subreddit csv here https://files.pushshift.io/reddit/subreddits/
-4. Running will take about an hour and should generate a data.txt file. I've added a sample.txt taken from that as an example.
+4. Running will take about an hour and should generate a data.txt file. I've added a sample.txt and a trimmed data.txt taken from that as an example.
 
-Feel free to add comments on any inefficiencies since I didn't focus too much on performance.
+Feel free to add comments on any inefficiencies since I didn't focus too much on performance. Also feel free to adjust any of the parameters as well
 
 To-do
 1. Count word count per input [TODO: Kevin]
@@ -23,5 +23,11 @@ To-do
     - pros: easier to scale
     - cons: need to handle more cases including bad and/or missing data
     
-
+Cleaning
+  - some posts and comments just say [deleted] which means the original post was removed. We should not include those
+  - submissions with no comments or comments less than some threshold should also be removed
+  - for comments we can focus on the higher rated ones more
+  
+  
+  
 Data source: https://files.pushshift.io/reddit/

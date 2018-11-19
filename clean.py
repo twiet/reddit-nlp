@@ -4,9 +4,15 @@ import sys
 import html
 
 def main():
-    maxN = 300
-    labelf = open("labels.txt", "w")
-    contentf = open("contents.txt", "w")
+    CUT_SM = 20
+    CUT_ML = 100
+    CUT_L = 300
+    labelf_l = open("labels.long.txt", "w")
+    labelf_m = open("labels.medium.txt", "w")
+    labelf_s = open("labels.short.txt", "w")
+    contentf_l = open("contents.long.txt", "w")
+    contentf_m = open("contents.medium.txt", "w")
+    contentf_s = open("contents.short.txt", "w")
     deleted = re.compile(r"\[deleted\]")
     punc = re.compile(r"[\(\)\[\]\{\}`~/\\<>\*\-\+\&\^%$#@_=\|]")
     white = re.compile(r"\s+")
@@ -25,24 +31,33 @@ def main():
         content = punc.sub(" ", content)
         content = white.sub(" ", content)
         tokens = content.split(" ")
-        if len(tokens) > 300:
+        if len(tokens) > CUT_L:
             content = " ".join(tokens[0:300])
+            f = contentf_l
+            lf = labelf_l
+        elif len(tokens) < CUT_SM:
+            f = contentf_s
+            lf = labelf_s
+        elif len(tokens) < CUT_ML:
+            f = contentf_m
+            lf = labelf_m
+        else:
+            f = contentf_l
+            lf = labelf_l
         while True:
             try:
-                contentf.write(content + "\n")
-            except UnicodeEncodeError as err:
+                f.write(content + "\n")
+            except UnicodeEncodeError as err:   
                 content = content[:err.start] + content[err.end:]
                 continue
             break
         while True:
             try:
-                labelf.write(label + "\n")
+                lf.write(label + "\n")
             except UnicodeEncodeError as err:
                 label = label[:err.start] + label[err.end:]
                 continue
             break
-    labelf.close()
-    contentf.close()
     dataf.close()
 
 main()

@@ -2,23 +2,37 @@ import json
 import re
 import sys
 import html
+import codecs
 
 def main():
     CUT_SM = 20
     CUT_ML = 100
     CUT_L = 300
-    labelf_l = open("labels.long.txt", "w")
-    labelf_m = open("labels.medium.txt", "w")
-    labelf_s = open("labels.short.txt", "w")
-    contentf_l = open("contents.long.txt", "w")
-    contentf_m = open("contents.medium.txt", "w")
-    contentf_s = open("contents.short.txt", "w")
+    labelf_l = codecs.open("labels." + str(CUT_L) + ".txt", "w", "utf-8")
+    labelf_m = codecs.open("labels." + str(CUT_ML) + ".txt", "w", "utf-8")
+    labelf_s = codecs.open("labels." + str(CUT_SM) + ".txt", "w", "utf-8")
+    contentf_l = codecs.open("contents." + str(CUT_L) + ".txt", "w", "utf-8")
+    contentf_m = codecs.open("contents." + str(CUT_ML) + ".txt", "w", "utf-8")
+    contentf_s = codecs.open("contents." + str(CUT_SM) + ".txt", "w", "utf-8")
     deleted = re.compile(r"\[deleted\]")
     punc = re.compile(r"[\(\)\[\]\{\}`~/\\<>\*\-\+\&\^%$#@_=\|]")
+    end1 = re.compile(r"\.")
+    end2 = re.compile(r",")
+    end3 = re.compile(r"\?")
+    end4 = re.compile(r"\!")
+    end5 = re.compile(r":")
+    end6 = re.compile(r";")
     white = re.compile(r"\s+")
     url = re.compile(r"\S*://\S+")
     quote = re.compile(r"\u2018|\u2019")
-    dataf = open(sys.argv[1], "r")
+    dquote = re.compile(r"\u201c|\u201d")
+    quesmk = re.compile(r"\u003f")
+    excmk = re.compile(r"\u0021")
+    period = re.compile(r"\u002e")
+    comma = re.compile(r"\u002c")
+    colon = re.compile(r"\u003a")
+    semicolon = re.compile(r"\u003b")
+    dataf = codecs.open(sys.argv[1], "r", "utf-8")
     logf = open("log.txt", "w")
     for line in dataf:
         data = json.loads(line)
@@ -28,7 +42,20 @@ def main():
         content = url.sub(" ", content)
         content = html.unescape(content)
         content = quote.sub("\'", content)
+        content = dquote.sub("\"", content)
+        content = quesmk.sub("?", content)
+        content = excmk.sub("!", content)
+        content = period.sub(".", content)
+        content = comma.sub(",", content)
+        content = colon.sub(":", content)
+        content = semicolon.sub(";", content)
         content = punc.sub(" ", content)
+        content = end1.sub(" . ", content)
+        content = end2.sub(" , ", content)
+        content = end3.sub(" ? ", content)
+        content = end4.sub(" ! ", content)
+        content = end5.sub(" : ", content)
+        content = end6.sub(" ; ", content)
         content = white.sub(" ", content)
         tokens = content.split(" ")
         if len(tokens) > CUT_L:
@@ -58,6 +85,12 @@ def main():
                 label = label[:err.start] + label[err.end:]
                 continue
             break
-    dataf.close()
+    dataf.close()    
+    labelf_l.close()
+    labelf_m.close()
+    labelf_s.close()
+    contentf_l.close()
+    contentf_m.close()
+    contentf_s.close()
 
 main()
